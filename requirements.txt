@@ -1,2 +1,2 @@
 openpiv
-opencv-python
+opencv_contrib_python==4.2.0.32

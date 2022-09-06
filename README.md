@@ -8,3 +8,7 @@ Examples of openpiv-python are separated from the main package
 2. [How to use MultiProcessor to increase efficiency](https://nbviewer.org/github/OpenPIV/openpiv-python-examples/blob/main/notebooks/tutorial2.ipynb)
 3. 
 
+
+
+### Complete directory through NBViewer:
+https://nbviewer.org/github/OpenPIV/openpiv-python-examples/tree/main/notebooks/

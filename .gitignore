@@ -129,3 +129,4 @@ dmypy.json
 .pyre/
 test_movie/Manikin_Thermal_Plume.MOV
 human_manikin/*
+.vscode/settings.json

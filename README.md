@@ -1,6 +1,14 @@
 # openpiv-python-examples
 Examples of openpiv-python are separated from the main package 
 
+## This repo works with OpenPIV >= 0.24.4b 
+
+Install from @alexlib repo: 
+
+    pip install git+https://github.com/alexlib/openpiv-python --upgrade
+
+
+
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/openpiv/openpiv-python-examples/main)
 
 List of notebooks:

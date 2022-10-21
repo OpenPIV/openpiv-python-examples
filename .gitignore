@@ -157,3 +157,8 @@ test6/piv01_1.bmp.txt
 test7/E001_1.tif.txt
 test8/frame0001.tif.txt
 test9/karman_16Hz_000_A.jpg.txt
+notebooks/field_A000.txt
+notebooks/Image_A000.png
+notebooks/test1.vec
+test1/OpenPIV_results_16_Test_1/field_A0000.txt
+test1/OpenPIV_results_32_Test_1/field_A0000.txt

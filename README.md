@@ -1,6 +1,14 @@
 # openpiv-python-examples
 Examples of openpiv-python are separated from the main package 
 
+## This repo works with OpenPIV >= 0.24.4b 
+
+Install from @alexlib repo: 
+
+    pip install git+https://github.com/alexlib/openpiv-python --upgrade
+
+
+
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/openpiv/openpiv-python-examples/main)
 
 List of notebooks:
@@ -16,7 +24,7 @@ https://github.com/OpenPIV/openpiv-python-examples/tree/main/notebooks
 6. [Ensemble correlation method using OpenPIV](https://github.com/OpenPIV/openpiv-python-examples/blob/main/notebooks/ensemble_correlation.ipynb)
 7. [Normalized or phase correlation in OpenPIV effect](https://github.com/OpenPIV/openpiv-python-examples/blob/main/notebooks/example_normalized_correlation_effect.ipynb)
 8. [Detailed demo how extended search OpenPIV algorithm works](https://github.com/OpenPIV/openpiv-python-examples/blob/main/notebooks/extended_search_area_vectorized.ipynb)
-9. [Dynamic masking tutorial - eliminate moving objects](https://github.com/OpenPIV/openpiv-python-examples/blob/main/notebooks/masking_tutorial.ipynb)
+9. [Dynamic masking tutorial - eliminate moving objects](https://github.com/OpenPIV/openpiv-python-examples/blob/main/notebooks/dynamic_masking.ipynb)
 10. [Using GIFs in OpenPIV](https://github.com/OpenPIV/openpiv-python-examples/blob/main/notebooks/openpiv_bird_gifs.ipynb) 
 11. [GIFs from PIV Standard project](https://github.com/OpenPIV/openpiv-python-examples/blob/main/notebooks/openpiv_gifs.ipynb)
 12. [Two-phase PIV separation of phases example](https://github.com/OpenPIV/openpiv-python-examples/blob/main/notebooks/phase_separation.ipynb)
@@ -25,6 +33,7 @@ https://github.com/OpenPIV/openpiv-python-examples/tree/main/notebooks
 15. [How to work with rectangular interrogation windows](https://github.com/OpenPIV/openpiv-python-examples/blob/main/notebooks/test_rectangular_windows.ipynb)
 16. [Deep dive into vectorized functions](https://github.com/OpenPIV/openpiv-python-examples/blob/main/notebooks/test_vectorized_functions.ipynb)
 17. [Comparing OpenPIV to PIVLab (Matlab), Part 1](https://github.com/OpenPIV/openpiv-python-examples/blob/main/notebooks/vonKarman_openpiv_11_maps.ipynb) and [Part 2](https://github.com/OpenPIV/openpiv-python-examples/blob/main/notebooks/vonKarman_pivlab_with_openpiv.ipynb)
+18. [Working with two-phase, e.g. inertial particles and PIV tracers](ttps://github.com/OpenPIV/openpiv-python-examples/blob/main/notebooks/phase_separation.ipynb)
 
 
 

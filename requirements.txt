@@ -1,3 +1,1 @@
 openpiv
-openpcv-python-headless
-jupyter

@@ -9,7 +9,7 @@ Install from @alexlib repo:
 
 
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/openpiv/openpiv-python-examples/main)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/alexlib/openpiv-python-examples/main)
 
 List of notebooks:
 https://github.com/OpenPIV/openpiv-python-examples/tree/main/notebooks

@@ -34,8 +34,8 @@ https://github.com/OpenPIV/openpiv-python-examples/tree/main/notebooks
 16. [Deep dive into vectorized functions](https://github.com/OpenPIV/openpiv-python-examples/blob/main/notebooks/test_vectorized_functions.ipynb)
 17. [Comparing OpenPIV to PIVLab (Matlab), Part 1](https://github.com/OpenPIV/openpiv-python-examples/blob/main/notebooks/vonKarman_openpiv_11_maps.ipynb) and [Part 2](https://github.com/OpenPIV/openpiv-python-examples/blob/main/notebooks/vonKarman_pivlab_with_openpiv.ipynb)
 18. [Working with two-phase, e.g. inertial particles and PIV tracers](https://github.com/OpenPIV/openpiv-python-examples/blob/main/notebooks/phase_separation.ipynb)
-19. [Bacteria under a microscope lens](https://github.com/OpenPIV/openpiv-python-examples/blob/main/notebooks/bacteria_in_a_circle.ipynb)
-20. [Active nematics](https://github.com/OpenPIV/openpiv-python-examples/blob/main/notebooks/active_nematics.ipynb)
+19. [Bacteria under a microscope lens](https://github.com/OpenPIV/openpiv-python-examples/blob/main/notebooks/bacteria_in_a_circle.ipynb) This notebook has also inspired VIKTOR app that runs on cloud https://cloud.viktor.ai/public/particle-image-velocimetry-in-bacteria-demonstration - at the last step one could see the links to the repository that is free and open to make other VIKTOR apps
+20. [Active nematics](https://github.com/OpenPIV/openpiv-python-examples/blob/main/notebooks/active_nematics.ipynb) 
 
 
 

@@ -1,0 +1,118 @@
+---
+title: "First PIV Analysis - Interactive"
+execute:
+  enabled: false
+---
+
+# First PIV Analysis - Interactive
+
+> Requires `openpiv>=0.26.0`. New: `scipy.fft` default and optional Rust via `backend="rust"`.
+
+This interactive tutorial provides an introduction to Particle Image Velocimetry (PIV) analysis. The code cells below are interactive - you can edit and run them in your browser!
+
+## Interrogation Window Parameters
+
+Try adjusting the parameters and running the code:
+
+```{python}
+#| editor: true
+
+import numpy as np
+
+# Define PIV parameters
+winsize = 32       # Interrogation window size in pixels
+searchsize = 38     # Search area size in pixels  
+overlap = 12         # Overlap between windows (50%)
+dt = 0.02           # Time between pulses in seconds
+
+print(f"Window size: {winsize} pixels")
+print(f"Search size: {searchsize} pixels")
+print(f"Overlap: {overlap} pixels ({overlap/winsize*100:.0f}% overlap)")
+print(f"Time step: {dt*1000:.1f} ms")
+```
+
+## Calculate Number of Vectors
+
+Modify the image size and calculate the number of interrogation windows:
+
+```{python}
+#| editor: true
+
+image_size = 256
+
+n_windows_x = (image_size - searchsize) // overlap + 1
+n_windows_y = (image_size - searchsize) // overlap + 1
+total_windows = n_windows_x * n_windows_y
+
+print(f"Image size: {image_size} x {image_size} pixels")
+print(f"Interrogation windows: {n_windows_x} x {n_windows_y}")
+print(f"Total vectors: {total_windows}")
+```
+
+## Velocity Calculation
+
+Try changing the displacement values:
+
+```{python}
+#| editor: true
+
+dx = 5.2   # Try changing this value!
+dy = -3.7  # Try changing this value!
+
+vx = dx / dt
+vy = dy / dt
+
+magnitude = np.sqrt(vx**2 + vy**2)
+direction = np.arctan2(vy, vx) * 180 / np.pi
+
+print(f"Displacement: dx = {dx:.1f} px, dy = {dy:.1f} px")
+print(f"Velocity: vx = {vx:.1f} pix/s, vy = {vy:.1f} pix/s")
+print(f"Magnitude: {magnitude:.1f} pix/s")
+print(f"Direction: {direction:.1f} degrees")
+```
+
+## Signal-to-Noise Validation
+
+```{python}
+#| editor: true
+
+np.random.seed(42)
+snr_values = np.random.uniform(1.0, 5.0, 100)
+threshold = 1.05
+
+valid = np.sum(snr_values >= threshold)
+invalid = np.sum(snr_values < threshold)
+
+print(f"Threshold: {threshold}")
+print(f"Valid vectors: {valid}/{len(snr_values)}")
+print(f"Validation rate: {valid/len(snr_values)*100:.1f}%")
+```
+
+## Interactive Plot
+
+Create a velocity field visualization:
+
+```{python}
+#| editor: true
+
+import matplotlib.pyplot as plt
+
+x = np.linspace(0, 256, 20)
+y = np.linspace(0, 256, 20)
+X, Y = np.meshgrid(x, y)
+
+U = 10 * np.sin(2 * np.pi * X / 128)
+V = 10 * np.cos(2 * np.pi * Y / 128)
+
+fig, ax = plt.subplots(figsize=(8, 8))
+Q = ax.quiver(X, Y, U, V, np.sqrt(U**2 + V**2), scale=50, pivot='middle', cmap='viridis')
+ax.set_aspect('equal')
+ax.invert_yaxis()
+ax.set_xlabel('X (pixels)')
+ax.set_ylabel('Y (pixels)')
+ax.set_title('Synthetic Velocity Field')
+plt.colorbar(Q, label='Velocity Magnitude (pix/s)')
+plt.tight_layout()
+
+fig
+```

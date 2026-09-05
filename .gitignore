@@ -176,3 +176,22 @@ test1/OpenPIV_results_8_Test_1/field_A0000.txt
 notebooks/YouTube Rewind 2019 For the Record  YouTubeRewind.3gpp
 notebooks/YouTube Rewind 2019 For the Record  YouTubeRewind.mp4
 *.txt
+uv.lock
+notebooks/*.nbconvert.ipynb
+notebooks/linear_normalized_extended.txt
+notebooks/preview.txt
+notebooks/Super-Large-Scale Flow Visualization with Snow.mp4
+notebooks/test_masked.txt
+notebooks/linear_normalized_extended.txt
+notebooks/preview.txt
+test10/B001_1.tif.txt
+test11/A001_1.tif.txt
+test9/karman_16Hz_000_A.jpg.txt
+/.agents
+/.qwen
+/marimo
+marimo/__marimo__/session/tutorial1.py.json
+/quarto-1.9.37
+*.gz
+skills-lock.json
+/.claude

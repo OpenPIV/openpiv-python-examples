@@ -1,0 +1,33 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "OpenPIV Tutorials"
+  description: "Interactive PIV tutorials with OpenPIV"
+  repo-url: "https://github.com/OpenPIV/openpiv-python-examples"
+  sidebar:
+    title: "OpenPIV"
+    contents:
+      - index.qmd
+      - section: "Getting Started"
+        contents:
+          - getting-started/01-first-piv-interactive.qmd
+    pinned: true
+    width: 250
+
+format:
+  html:
+    theme: cosmo
+    highlight-style: github
+    code-copy: true
+    code-overflow: wrap
+
+execute:
+  enabled: true
+  freeze: auto
+
+marimo:
+  enabled: true
+  external-env: true
+  reactive: true

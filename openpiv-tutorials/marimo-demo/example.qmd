@@ -1,0 +1,110 @@
+---
+title: "Marimo Interactive Example"
+format:
+  html:
+    embed-resources: true
+    page-layout: full
+execute:
+  echo: true
+---
+
+# Interactive Marimo Example in Quarto
+
+This document demonstrates how to embed reactive Marimo code in Quarto documents.
+
+## Simple Interactive Slider
+
+```{marimo}
+#| echo: true
+import marimo as mo
+
+# Create an interactive slider
+slider = mo.ui.slider(1, 100, 50, label="Adjust this value:")
+slider
+```
+
+## React to the Slider Value
+
+```{marimo}
+#| echo: true
+# This cell reacts to changes in the slider above
+import math
+import numpy as np
+
+# Use the slider value in a calculation
+value = slider.value
+result = np.sin(value * np.pi / 180)  # Convert to radians and calculate sine
+
+mo.md(f"""
+## Results
+- Slider value: {value}
+- Sine({value}°) = {result:.4f}
+""")
+```
+
+## Interactive Plot
+
+```{marimo}
+#| echo: true
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Create data based on slider value
+x = np.linspace(0, slider.value * 2, 100)
+y = np.sin(x) * np.exp(-x/20)
+
+# Create the plot
+fig, ax = plt.subplots(figsize=(10, 6))
+ax.plot(x, y, 'b-', linewidth=2)
+ax.set_xlabel('X')
+ax.set_ylabel('Y')
+ax.set_title(f'Damped Sine Wave (frequency = {slider.value})')
+ax.grid(True, alpha=0.3)
+plt.tight_layout()
+
+fig
+```
+
+## Multiple Controls
+
+```{marimo}
+#| echo: true
+import marimo as mo
+
+# Create multiple interconnected controls
+slider_a = mo.ui.slider(0, 10, 2, label="Amplitude")
+slider_f = mo.ui.slider(0.1, 5, 1, label="Frequency")
+dropdown = mo.ui.dropdown(['sin', 'cos', 'tan'], label='Function', value='sin')
+
+mo.hstack([slider_a, slider_f, dropdown])
+```
+
+```{marimo}
+#| echo: true
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Create plot based on multiple controls
+x = np.linspace(0, 4*np.pi, 200)
+
+# Select function based on dropdown
+if dropdown.value == 'sin':
+    y = slider_a.value * np.sin(slider_f.value * x)
+elif dropdown.value == 'cos':
+    y = slider_a.value * np.cos(slider_f.value * x)
+else:  # tan
+    y = slider_a.value * np.tan(slider_f.value * x)
+    # Limit extreme values for better visualization
+    y = np.clip(y, -10, 10)
+
+# Create the plot
+fig, ax = plt.subplots(figsize=(10, 6))
+ax.plot(x, y, 'r-', linewidth=2)
+ax.set_xlabel('X')
+ax.set_ylabel('Y')
+ax.set_title(f'{dropdown.value.capitalize()} Wave (A={slider_a.value}, f={slider_f.value})')
+ax.grid(True, alpha=0.3)
+plt.tight_layout()
+
+fig
+```

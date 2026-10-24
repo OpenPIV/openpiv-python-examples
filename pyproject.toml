@@ -1,0 +1,46 @@
+[project]
+name = "openpiv-python-examples"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "ffmpeg>=1.4",
+    "jupyter>=1.1.1",
+    "marimo>=0.23.1",
+    "nbconvert>=7.16.6",
+    "opencv-python-headless>=4.12.0.88",
+    "openpiv>=0.26.0",
+    "pivpy>=0.0.20",
+    "pytube>=15.0.0",
+    "ruff>=0.15.10",
+    "watermark>=2.5.0",
+    "yt-dlp>=2025.6.30",
+]
+
+[tool.ruff]
+# Set the line length
+line-length = 88
+# Directories to exclude from linting
+exclude = [
+    ".git",
+    ".github",
+    ".ruff_cache",
+    ".venv",
+    "docs",
+    "marimo",
+    "notebooks",
+    "openpiv-tutorials/_extensions",
+]
+
+[tool.ruff.lint]
+# Select rules (E: error, F: pyflakes, B: bugbear, I: isort)
+select = ["E", "F", "B", "I"]
+# Specific rules to ignore (if any)
+ignore = []
+
+[tool.setuptools.packages.find]
+exclude = ["data", "data.*", "marimo", "marimo.*", "notebooks", "notebooks.*", "output_3D_test", "output_3D_test.*", "openpiv-tutorials", "openpiv-tutorials.*"]
+
+[tool.marimo]
+# Optional Marimo configuration can be added here

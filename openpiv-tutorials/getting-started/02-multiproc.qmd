@@ -1,0 +1,103 @@
+---
+title: "Multiprocessing for Speed"
+---
+
+# Multiprocessing for Speed
+
+This tutorial shows how to use OpenPIV's multiprocessing capabilities to analyze multiple image pairs in parallel.
+
+## Why Multiprocessing?
+
+When analyzing movies or long sequences, you need to process many image pairs. Multiprocessing distributes the workload across multiple CPU cores, significantly reducing processing time.
+
+## Code Example
+
+Here's how to set up parallel processing:
+
+```{python}
+#| execute:
+#| kernel: python3
+
+import pathlib
+import numpy as np
+from openpiv import tools, scaling, pyprocess, validation, filters
+
+# Define a worker function for processing each image pair
+def process_pair(args):
+    """Process a single image pair."""
+    file_a, file_b, output_idx = args
+    
+    # Read images - try repo-relative paths
+    for _base in [pathlib.Path("../data/test1"), pathlib.Path("data/test1"), pathlib.Path("../../data/test1")]:
+        if (_base / file_a).exists():
+            img_a = tools.imread(_base / file_a)
+            img_b = tools.imread(_base / file_b)
+            break
+    else:
+        img_a = tools.imread(pathlib.Path("../data/test1") / file_a)
+        img_b = tools.imread(pathlib.Path("../data/test1") / file_b)
+    
+    # Convert to int32 for processing
+    img_a = (img_a * 1024).astype(np.int32)
+    img_b = (img_b * 1024).astype(np.int32)
+    
+    # Run PIV analysis
+    u, v, sig2noise = pyprocess.extended_search_area_piv(
+        img_a, img_b,
+        window_size=32,
+        overlap=16,
+        dt=0.02,
+        search_area_size=38,
+        sig2noise_method='peak2peak',
+        backend='scipy',  # OpenPIV 0.26.0: 'scipy' (default, scipy.fft) | 'rust' | 'auto'
+    )
+    
+    # Validate
+    mask = validation.sig2noise_val(sig2noise, threshold=1.5)
+    
+    # Get coordinates
+    x, y = pyprocess.get_coordinates(
+        image_size=img_a.shape,
+        search_area_size=38,
+        overlap=16
+    )
+    
+    return x, y, u, v, mask
+
+print("Worker function defined for parallel processing")
+```
+
+## Using the Multiprocesser
+
+OpenPIV provides a convenient class for managing parallel processing:
+
+```{python}
+#| execute:
+#| kernel: python3
+
+# Check available test files
+import os
+for _cand in [pathlib.Path("../data/test1"), pathlib.Path("data/test1"), pathlib.Path("../../data/test1")]:
+    if _cand.exists():
+        test_path = _cand
+        break
+else:
+    test_path = pathlib.Path("../data/test1")
+files = list(test_path.glob("*.bmp"))
+print(f"Available test images: {len(files)}")
+for f in sorted(files):
+    print(f"  - {f.name}")
+```
+
+## Summary
+
+Multiprocessing is essential for:
+- Analyzing long image sequences
+- Processing high-resolution images
+- Reducing overall processing time
+
+## Next Steps
+
+Try the [Multipass PIV tutorial](03-multipass.qmd) to learn about iterative refinement for improved accuracy.
+
+> **OpenPIV 0.26.0 tip:** for batch runs use `PIVSettings(backend="auto")` — it will pick Rust when `openpiv-rust` is installed, otherwise `scipy.fft`. Set `n_cpus` in settings for multiprocessing.

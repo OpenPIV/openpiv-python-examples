@@ -2,4 +2,6 @@ opencv-python-headless
 jupyter
 watermark
 nbconvert
-openpiv
+openpiv>=0.26.0
+# optional faster Rust backend:
+# openpiv-rust  # pip install openpiv[rust]

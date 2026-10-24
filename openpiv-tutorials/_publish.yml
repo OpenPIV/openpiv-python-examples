@@ -1,0 +1,3 @@
+- source: project
+  gh-pages:
+    - url: "https://alexlib.github.io/openpiv-python-examples/"

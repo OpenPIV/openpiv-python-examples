@@ -1,7 +1,9 @@
 # openpiv-python-examples
 Examples of openpiv-python are separated from the main package 
 
-## This repo works with OpenPIV >= 0.24.4b 
+## This repo works with OpenPIV >= 0.26.0
+
+**New in 0.26.0:** `scipy.fft` by default (2-3x faster) and optional Rust acceleration (`pip install openpiv[rust]`). Use `backend="scipy"` / `backend="rust"` / `backend="auto"` in `pyprocess.extended_search_area_piv` and `PIVSettings(backend=...)`. 
 
 Install from @alexlib repo: 
 

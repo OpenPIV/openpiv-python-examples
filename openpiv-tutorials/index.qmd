@@ -1,0 +1,56 @@
+---
+title: "OpenPIV Tutorials"
+---
+
+# Welcome to OpenPIV
+
+Interactive tutorials for learning Particle Image Velocimetry (PIV) using OpenPIV Python library.
+
+## Getting Started
+
+These tutorials are organized by difficulty level, from basics to advanced techniques.
+
+### Level 1: Basics
+
+- [First PIV Analysis](getting-started/01-first-piv.qmd) - Learn the fundamentals of PIV analysis
+- [Multiprocessing](getting-started/02-multiproc.qmd) - Speed up processing with multiple cores
+
+## Featured Test Cases
+
+| Dataset | Description | Application |
+|---------|-------------|-------------|
+| test1 | Simple two-image PIV | Basic analysis |
+| test20 | Multiple image pairs | Multipass processing |
+| test3 | Von Karman vortex street | Advanced validation |
+
+## Running the Tutorials
+
+### Option 1: Run Locally with Marimo
+
+To run interactive notebooks with marimo:
+
+```bash
+# Install marimo
+pip install marimo
+
+# Run a notebook interactively
+marimo run ../marimo/tutorial1.py
+```
+
+### Option 2: View Online
+
+This website shows pre-rendered output from tutorials. Each page displays:
+
+- Code cells with explanations
+- Executed results
+- Interactive visualizations
+
+### Option 3: Download and Run
+
+Download the `.py` marimo files from the `marimo/` folder in the main repository and run locally.
+
+## Data
+
+Test data is included in the `data/` folder:
+- `test1/` - Basic PIV test images
+- `test20/` - Multiple image pairs for multipass

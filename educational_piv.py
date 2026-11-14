@@ -7,19 +7,19 @@ app = marimo.App(width="medium")
 @app.cell
 def __():
     import marimo as mo
-    mo.md("# Educational PIV with OpenPIV\n\nThis notebook teaches what PIV is and how to use OpenPIV properly.")
+    mo.md("# Educational PIV with OpenPIV\n\nThis site teaches what PIV is, how to run it, and practical tips for good results.")
     return (mo,)
 
 
 @app.cell
 def __(mo):
-    mo.md("## 1. What is PIV?\nParticle Image Velocimetry estimates velocity fields from pairs of images by correlating small windows.")
+    mo.md("## 1. What is PIV?\nParticle Image Velocimetry estimates 2D velocity fields by cross-correlating small interrogation windows between two images. Key ideas:\n- Window size sets spatial resolution and accuracy.\n- Overlap increases vector density but not independent information.\n- Multi-pass with deformation improves accuracy on strong gradients.")
     return ()
 
 
 @app.cell
 def __(mo):
-    mo.md("## 2. Generate synthetic images\nWe use OpenPIV's synthetic image generator to create a known flow.")
+    mo.md("## 2. Generate synthetic images\nWe use OpenPIV's synthetic image generator to create a known flow for validation.")
     return ()
 
 
@@ -45,7 +45,7 @@ def __(img_a, img_b):
 
 @app.cell
 def __(mo):
-    mo.md("## 3. Run PIV\nWe use extended_search_area_piv with a 32x32 window.")
+    mo.md("## 3. Run PIV\nTip: start with window_size=32, overlap=50%, 2-3 passes. Use dt to convert to physical units.")
     return ()
 
 
@@ -55,7 +55,7 @@ def __(img_a, img_b):
     u, v, s2n = pyprocess.extended_search_area_piv(
         img_a.astype(int), img_b.astype(int), window_size=32, overlap=16, dt=0.1, search_area_size=64
     )
-    print("vectors", u.shape)
+    print("vectors", u.shape, "finite:", (u == u).sum())
     return (u, v, s2n)
 
 
@@ -70,7 +70,13 @@ def __(u, v):
 
 @app.cell
 def __(mo):
-    mo.md("## 4. Why masking and smoothing?\nMasking removes objects; smoothing reduces noise. Use dynamic_masking and smoothn.")
+    mo.md("## 4. Tips & Tricks\n- Use dynamic masking for objects in the flow.\n- Apply validation (median, std) to remove outliers.\n- Smooth with smoothn for presentation, not for validation.\n- Check sig2noise; low values indicate poor correlation.\n- Use Rust backend for speed on large datasets.")
+    return ()
+
+
+@app.cell
+def __(mo):
+    mo.md("## 5. Common pitfalls\n- Too small windows → noise; too large → lose gradients.\n- Insufficient overlap → coarse field.\n- Not validating → false vectors.\n- Ignoring dt → wrong units.")
     return ()
 
 

@@ -26,6 +26,13 @@ def __():
 
 ## Why it matters
 PIV gives **spatial fields**, not just point measurements — you can see vortices, shear layers, wakes, jets, etc.
+
+## See it in real examples
+- **[test1](marimo_cases/test1.html)** ([.py](marimo_cases/test1.py), [molab](https://molab.marimo.io/github/openpiv/openpiv-python-examples/blob/main/marimo_cases/test1.py)) — simple experimental pair; a clean starting point.
+- **[test9](marimo_cases/test9.html)** ([.py](marimo_cases/test9.py), [molab](https://molab.marimo.io/github/openpiv/openpiv-python-examples/blob/main/marimo_cases/test9.py)) — Kármán vortex street (`karman_16Hz_*`); see periodic wake structures.
+- **[openpiv_bridgepile_wake](marimo_notebooks/openpiv_bridgepile_wake.html)** ([.py](marimo_notebooks/openpiv_bridgepile_wake.py)) — wake behind a bridge pile.
+- **[bacteria_in_a_circle](marimo_notebooks/bacteria_in_a_circle.html)** ([.py](marimo_notebooks/bacteria_in_a_circle.py)) / **[test17](marimo_cases/test17.html)** — biological microscale motion.
+- **[active_nematics](marimo_notebooks/active_nematics.html)** ([.py](marimo_notebooks/active_nematics.py)) / **[test18](marimo_cases/test18.html)** — active matter flows.
 """)
     return (mo,)
 

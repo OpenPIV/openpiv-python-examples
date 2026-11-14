@@ -17,6 +17,8 @@ This page demonstrates the **output_3D_test** dataset/case from the OpenPIV exam
 - Learn how to run PIV on this case and what to look for (seeding, displacement, noise, masks, etc.).
 - Use it as a starting point: adjust window size, overlap, dt, and validation for your needs.
 
+**[Open in molab (interactive)](https://molab.marimo.io/github/openpiv/openpiv-python-examples/blob/main/marimo_cases/output_3D_test.py)**
+
 **Files (sample):** displaced_bar_deformation_field.png, displaced_bar_frame1.png, displaced_bar_frame2.png, displaced_bar_sig2noise.png
 """)
     return (mo,)

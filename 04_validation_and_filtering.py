@@ -10,17 +10,19 @@ def __():
     mo.md(r"""
 # 04 — Validation & filtering
 
-PIV always produces some **spurious vectors** (outliers) due to low seeding, noise, loss of pairs, masks, or gradients. Validation detects them; filtering/replacement fixes gaps.
+PIV always produces some **spurious vectors** (outliers). Validation detects them; filtering/replacement fixes gaps.
 
 ## Common methods
-- **Signal-to-noise ratio (s2n)**: reject vectors with weak/ambiguous correlation peaks (e.g. peak2peak, peak2mean).
+- **Signal-to-noise ratio (s2n)**: reject vectors with weak/ambiguous correlation peaks.
 - **Global/range filter**: remove physically impossible velocities.
-- **Local median / normalized median**: compare each vector to neighbors; outliers deviate strongly.
+- **Local median / normalized median**: compare each vector to neighbors.
 - **Standard deviation filter**: reject vectors far from local statistics.
 
-## After detection
-- Mark invalid vectors (mask/NaN).
-- Replace with interpolated/local-mean values if needed for visualization or further processing — but keep track of what was replaced.
+## Learn from these examples
+- **[compare_median_filters](marimo_notebooks/compare_median_filters.html)** ([interactive .py](marimo_notebooks/compare_median_filters.py), [molab](https://molab.marimo.io/github/openpiv/openpiv-python-examples/blob/main/marimo_notebooks/compare_median_filters.py)) — original vs normalized median filter. *Use when:* choosing robust outlier detection.
+- **[example_normalized_correlation_effect](marimo_notebooks/example_normalized_correlation_effect.html)** ([interactive .py](marimo_notebooks/example_normalized_correlation_effect.py), [molab](https://molab.marimo.io/github/openpiv/openpiv-python-examples/blob/main/marimo_notebooks/example_normalized_correlation_effect.py)) — effect of normalized correlation on complex images.
+- **[compare_correlations_algorithms](marimo_notebooks/compare_correlations_algorithms.html)** ([interactive .py](marimo_notebooks/compare_correlations_algorithms.py), [molab](https://molab.marimo.io/github/openpiv/openpiv-python-examples/blob/main/marimo_notebooks/compare_correlations_algorithms.py)) — linear vs circular correlation. *Use when:* understanding correlation choices and artifacts.
+- **[studying_correlations](marimo_notebooks/studying_correlations.html)** ([interactive .py](marimo_notebooks/studying_correlations.py), [molab](https://molab.marimo.io/github/openpiv/openpiv-python-examples/blob/main/marimo_notebooks/studying_correlations.py)) — deep dive into correlation behavior.
 """)
     return (mo,)
 

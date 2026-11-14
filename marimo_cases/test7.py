@@ -17,6 +17,8 @@ This page demonstrates the **test7** dataset/case from the OpenPIV examples repo
 - Learn how to run PIV on this case and what to look for (seeding, displacement, noise, masks, etc.).
 - Use it as a starting point: adjust window size, overlap, dt, and validation for your needs.
 
+**[Open in molab (interactive)](https://molab.marimo.io/github/openpiv/openpiv-python-examples/blob/main/marimo_cases/test7.py)**
+
 **Files (sample):** E001_1.tif, E001_2.tif
 """)
     return (mo,)

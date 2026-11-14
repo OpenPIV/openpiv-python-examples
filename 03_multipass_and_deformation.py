@@ -21,17 +21,14 @@ A single pass with fixed windows struggles with strong gradients and large displ
 - Reduces in-plane loss of correlation.
 - Allows smaller final windows than single-pass would permit.
 
-## Tradeoffs
-- More computation.
-- Bad first-pass vectors can bias later passes → validate between passes.
+## Learn from these examples
+- **[tutorial_multipass](marimo_notebooks/tutorial_multipass.html)** ([interactive .py](marimo_notebooks/tutorial_multipass.py), [molab](https://molab.marimo.io/github/openpiv/openpiv-python-examples/blob/main/marimo_notebooks/tutorial_multipass.py)) — step-by-step multi-pass processing.
+- **[test20_windef](marimo_notebooks/test20_windef.html)** ([interactive .py](marimo_notebooks/test20_windef.py), [molab](https://molab.marimo.io/github/openpiv/openpiv-python-examples/blob/main/marimo_notebooks/test20_windef.py)) — window deformation algorithm in action. *Use when:* you need higher accuracy in gradients.
+- **[window_deformation_comparison](marimo_notebooks/window_deformation_comparison.html)** ([interactive .py](marimo_notebooks/window_deformation_comparison.py), [molab](https://molab.marimo.io/github/openpiv/openpiv-python-examples/blob/main/marimo_notebooks/window_deformation_comparison.py)) — compare deformation strategies.
+- **[case_B_windef_small_window](marimo_notebooks/case_B_windef_small_window.html)** ([interactive .py](marimo_notebooks/case_B_windef_small_window.py), [molab](https://molab.marimo.io/github/openpiv/openpiv-python-examples/blob/main/marimo_notebooks/case_B_windef_small_window.py)) — PIV challenge case with multi-grid deformation.
+- **[test20_multipass](marimo_notebooks/test20_multipass.html)** / **[test20 case](marimo_cases/test20.html)** — practical multi-pass on test20 data.
 """)
     return (mo,)
-
-
-@app.cell
-def __(mo):
-    mo.md("## Example with `windef` settings (conceptual)\nIn OpenPIV, `windef`/`PIVSettings` controls passes via window sizes and overlaps, e.g. `(64,32,16)` windows with `(32,16,8)` overlap.")
-    return ()
 
 
 @app.cell

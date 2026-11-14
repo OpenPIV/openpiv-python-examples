@@ -17,6 +17,8 @@ This page demonstrates the **two_phase_piv** dataset/case from the OpenPIV examp
 - Learn how to run PIV on this case and what to look for (seeding, displacement, noise, masks, etc.).
 - Use it as a starting point: adjust window size, overlap, dt, and validation for your needs.
 
+**[Open in molab (interactive)](https://molab.marimo.io/github/openpiv/openpiv-python-examples/blob/main/marimo_cases/two_phase_piv.py)**
+
 **Files (sample):** artificial_A.tif, real_A.tif, real_B.tif
 """)
     return (mo,)

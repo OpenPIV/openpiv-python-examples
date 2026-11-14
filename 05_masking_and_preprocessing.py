@@ -10,20 +10,18 @@ def __():
     mo.md(r"""
 # 05 — Masking & preprocessing
 
-Real experiments often include walls, models, bubbles, reflections, or moving objects that should not be treated as flow. **Masking** excludes them.
+Real experiments often include walls, models, bubbles, or moving objects that should not be treated as flow. **Masking** excludes them.
 
 ## Types
-- **Static mask**: known geometry (e.g. airfoil, wall) constant across frames.
-- **Dynamic mask**: objects detected per image/frame (moving interfaces, bubbles, etc.).
+- **Static mask**: known geometry constant across frames.
+- **Dynamic mask**: objects detected per image/frame.
 
-## Preprocessing goals
-- Improve particle contrast and uniformity.
-- Reduce background illumination variations.
-- Suppress features that confuse correlation.
-
-## In OpenPIV
-- `preprocess.dynamic_masking` can segment objects (edges/intensity/combined methods in newer versions).
-- Masks can be applied so invalid regions produce no/invalid vectors.
+## Learn from these examples
+- **[dynamic_masking](marimo_notebooks/dynamic_masking.html)** ([interactive .py](marimo_notebooks/dynamic_masking.py), [molab](https://molab.marimo.io/github/openpiv/openpiv-python-examples/blob/main/marimo_notebooks/dynamic_masking.py)) — remove moving objects dynamically. *Use when:* objects move through the field of view.
+- **[openpiv_static_masking_example](marimo_notebooks/openpiv_static_masking_example.html)** ([interactive .py](marimo_notebooks/openpiv_static_masking_example.py), [molab](https://molab.marimo.io/github/openpiv/openpiv-python-examples/blob/main/marimo_notebooks/openpiv_static_masking_example.py)) — apply a static mask (e.g. circular region) in multi-pass windef. *Use when:* geometry is fixed.
+- **[preprocessing_filters](marimo_notebooks/preprocessing_filters.html)** ([interactive .py](marimo_notebooks/preprocessing_filters.py), [molab](https://molab.marimo.io/github/openpiv/openpiv-python-examples/blob/main/marimo_notebooks/preprocessing_filters.py)) — spatial/temporal filters for image enhancement and background subtraction.
+- **[test21 case](marimo_cases/test21.html)** ([interactive .py](marimo_cases/test21.py)) — bubbles with a provided mask image (`bubblesMask.png`).
+- **[phase_separation](marimo_notebooks/phase_separation.html)** ([interactive .py](marimo_notebooks/phase_separation.py), [molab](https://molab.marimo.io/github/openpiv/openpiv-python-examples/blob/main/marimo_notebooks/phase_separation.py)) — separate phases in two-phase PIV before analysis.
 """)
     return (mo,)
 

@@ -10,7 +10,7 @@ def __():
     mo.md(r"""
 # 02 — Basic PIV workflow
 
-This lesson shows the minimal OpenPIV pipeline: load/generate images → cross-correlate → interpret vectors.
+This lesson shows the minimal OpenPIV pipeline and connects it to real examples in this repository.
 
 ## Steps
 1. Prepare image pair (A, B).
@@ -18,6 +18,12 @@ This lesson shows the minimal OpenPIV pipeline: load/generate images → cross-c
 3. Run cross-correlation to estimate displacement $(u,v)$ in pixels.
 4. Convert to physical units with $\Delta t$ and scaling if needed.
 5. Validate and visualize.
+
+## Learn from these examples
+- **[tutorial1](marimo_notebooks/tutorial1.html)** ([interactive .py](marimo_notebooks/tutorial1.py), [molab](https://molab.marimo.io/github/openpiv/openpiv-python-examples/blob/main/marimo_notebooks/tutorial1.py)) — simplest two-image workflow; shows loading, processing, and plotting. *Use when:* you want the baseline pipeline.
+- **[tutorial2](marimo_notebooks/tutorial2.html)** ([interactive .py](marimo_notebooks/tutorial2.py), [molab](https://molab.marimo.io/github/openpiv/openpiv-python-examples/blob/main/marimo_notebooks/tutorial2.py)) — multiprocessing for speed. *Use when:* processing many pairs.
+- **[test1 case](marimo_cases/test1.html)** ([interactive .py](marimo_cases/test1.py)) — classic small image pair (`exp1_001_a/b.bmp`). *Use when:* verifying your setup on a known case.
+- **[test2 case](marimo_cases/test2.html)** ([interactive .py](marimo_cases/test2.py)) — sequence of frames; *use when:* learning frame-to-frame processing.
 """)
     return (mo,)
 

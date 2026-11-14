@@ -29,47 +29,60 @@ This page demonstrates the **test10** dataset/case from the OpenPIV examples rep
 - Learn how to run PIV on this case and what to look for (seeding, displacement, noise, masks, etc.).
 - Use it as a starting point: adjust window size, overlap, dt, and validation for your needs.
 
-**[Open in molab (interactive)](https://molab.marimo.io/github/openpiv/openpiv-python-examples/blob/main/marimo_cases/test10.py)**
+**[Open in molab (interactive)](https://molab.marimo.io/github/OpenPIV/openpiv-python-examples/blob/main/marimo_cases/test10.py)**
 
-**Files (sample):** B001_1.tif, B001_2.tif, B002_1.tif, B002_2.tif
+**Files (sample):** B001_1.tif, B001_1.tif.txt, B001_2.tif, B002_1.tif, B002_2.tif, B003_1.tif
+
+*Note: when running in molab/cloud, this notebook downloads the case files from GitHub automatically.*
 """)
     return (mo,)
 
 
 @app.cell
 def __():
-    import os, glob
-    files = sorted(glob.glob("test10/*"))
+    import os, glob, urllib.request
+    case_name = 'test10'
+    base_url = 'https://raw.githubusercontent.com/OpenPIV/openpiv-python-examples/main' + "/" + case_name
+    case_files = ['B001_1.tif', 'B001_1.tif.txt', 'B001_2.tif', 'B002_1.tif', 'B002_2.tif', 'B003_1.tif', 'B003_2.tif', 'B004_1.tif', 'B004_2.tif', 'B005_1.tif', 'B005_2.tif', 'B006_1.tif', 'B006_2.tif']
+    os.makedirs(case_name, exist_ok=True)
+    for name in case_files:
+        dest = os.path.join(case_name, name)
+        if not os.path.exists(dest):
+            try:
+                urllib.request.urlretrieve(base_url + "/" + name, dest)
+            except Exception as e:
+                print("skip", name, e)
+    file_list = sorted(glob.glob(case_name + "/*"))
     print("Files in case:")
-    for f in files[:30]:
-        print(" -", os.path.basename(f))
-    return (files,)
+    for fpath in file_list[:30]:
+        print(" -", os.path.basename(fpath))
+    return case_name
 
 
 @app.cell
 def __(mo):
     mo.md("## Load and display images")
-    return ()
+    return
 
 
 @app.cell
-def __():
+def __(case_name):
     import matplotlib.pyplot as plt1
     from openpiv import tools
-    import os
-    a = "B001_1.tif"
-    b = "B001_2.tif"
-    img_a = tools.imread(os.path.join("test10", a)) if a else None
-    img_b = tools.imread(os.path.join("test10", b)) if b else None
+    from os.path import join, exists
+    img_a_path = 'B001_1.tif'
+    img_b_path = 'B001_2.tif'
+    img_a = tools.imread(join(case_name, img_a_path)) if img_a_path and exists(join(case_name, img_a_path)) else None
+    img_b = tools.imread(join(case_name, img_b_path)) if img_b_path and exists(join(case_name, img_b_path)) else None
     if img_a is not None and img_b is not None:
-        fig1, ax1 = plt1.subplots(1,2,figsize=(8,4))
-        ax1[0].imshow(img_a, cmap='gray'); ax1[0].set_title(a)
-        ax1[1].imshow(img_b, cmap='gray'); ax1[1].set_title(b)
-        out = fig1
+        fig1, ax1 = plt1.subplots(1, 2, figsize=(8, 4))
+        ax1[0].imshow(img_a, cmap="gray"); ax1[0].set_title(img_a_path)
+        ax1[1].imshow(img_b, cmap="gray"); ax1[1].set_title(img_b_path)
+        display_fig = fig1
     else:
-        out = "No image pair found to display."
-    out
-    return (img_a, img_b)
+        display_fig = "No image pair found to display."
+    display_fig
+    return img_a, img_b
 
 
 @app.cell
@@ -80,7 +93,7 @@ Adjust parameters based on this case: window size, overlap, search area, and `dt
 - **Tip:** ensure particle displacement is ~5–10 px between frames.
 - **Tip:** inspect signal-to-noise and validate outliers.
 """)
-    return ()
+    return
 
 
 @app.cell
@@ -89,37 +102,37 @@ def __(img_a, img_b):
     from openpiv import pyprocess
     if img_a is not None and img_b is not None:
         try:
-            u, v, s2n = pyprocess.extended_search_area_piv(
+            u_res, v_res, s2n_res = pyprocess.extended_search_area_piv(
                 img_a.astype(np.int32), img_b.astype(np.int32),
                 window_size=32, overlap=16, dt=1.0, search_area_size=64,
-                sig2noise_method='peak2peak'
+                sig2noise_method="peak2peak"
             )
-            print('PIV computed. shape:', u.shape, 'finite:', int(np.isfinite(u).sum()))
-            res = (u,v,s2n)
+            print("PIV computed. shape:", u_res.shape, "finite:", int(np.isfinite(u_res).sum()))
+            piv_res = (u_res, v_res, s2n_res)
         except Exception as e:
-            print('PIV failed for default settings:', e)
-            print('Try different window_size/overlap/search_area for this case.')
-            res = (None,None,None)
+            print("PIV failed for default settings:", e)
+            print("Try different window_size/overlap/search_area for this case.")
+            piv_res = (None, None, None)
     else:
-        res = (None,None,None)
-    res
-    return res
+        piv_res = (None, None, None)
+    piv_res
+    return (piv_res,)
 
 
 @app.cell
-def __(res):
+def __(piv_res):
     import matplotlib.pyplot as plt2
-    u,v,s2n = res
-    if u is not None:
+    u_r, v_r, s2n_r = piv_res
+    if u_r is not None:
         fig2, ax2 = plt2.subplots()
-        ax2.quiver(u, v)
+        ax2.quiver(u_r, v_r)
         ax2.invert_yaxis()
-        ax2.set_title('Velocity field (test10)')
+        ax2.set_title("Velocity field (test10)")
         out2 = fig2
     else:
-        out2 = 'No vector field to plot.'
+        out2 = "No vector field to plot."
     out2
-    return ()
+    return
 
 
 @app.cell
@@ -131,9 +144,9 @@ def __(mo):
 - Validate vectors (s2n, median) and consider multi-pass/window deformation for gradients.
 - Compare with provided reference outputs in this folder if available (e.g. `.txt` results).
 
-Back to [all cases](all_cases.html) · [index](index.html)
+Back to [all cases](../all_cases.html) · [index](../index.html)
 """)
-    return ()
+    return
 
 
 if __name__ == "__main__":

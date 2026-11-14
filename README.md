@@ -1,4 +1,10 @@
 # openpiv-python-examples
+
+## Educational site (start here)
+
+- **https://www.openpiv.net/openpiv-python-examples/** — interactive-style lessons exported as HTML (marimo notebooks) explaining what PIV is, how to use OpenPIV, and practical tips/tricks/insights.
+- Source notebooks: `01_intro_to_piv.py` … `06_tips_tricks_pitfalls.py` (run/edit with `marimo edit <file>.py`).
+
 Examples of openpiv-python are separated from the main package 
 
 ## This repo works with OpenPIV >= 0.24.4b 

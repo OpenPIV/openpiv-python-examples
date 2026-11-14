@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenPIV Educational Site</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:900px;margin:2rem auto;padding:0 1rem;line-height:1.6;color:#222}
+    h1,h2{line-height:1.2} a{color:#0b5ed7} .card{border:1px solid #ddd;border-radius:8px;padding:1rem 1.25rem;margin:1rem 0}
+    .muted{color:#555} ul{padding-left:1.2rem}
+  </style>
+</head>
+<body>
+  <h1>OpenPIV Educational Site</h1>
+  <p>Learn Particle Image Velocimetry (PIV) and how to use <a href="https://github.com/OpenPIV/openpiv-python">OpenPIV</a> properly. These lessons combine explanations, runnable examples, tips, and pitfalls.</p>
+
+  <div class="card">
+    <h2>Start here</h2>
+    <ul>
+      <li><a href="educational_piv.html">Educational PIV overview</a> — what PIV is, synthetic example, basic run, and key tips.</li>
+      <li><a href="01_intro_to_piv.html">01 — Introduction to PIV</a> — physics, imaging, particles, and what a PIV algorithm measures.</li>
+      <li><a href="02_basic_piv.html">02 — Basic PIV workflow</a> — windows, overlap, dt, running OpenPIV, and reading results.</li>
+      <li><a href="03_multipass_and_deformation.html">03 — Multi-pass & window deformation</a> — why multiple passes improve accuracy and gradients.</li>
+      <li><a href="04_validation_and_filtering.html">04 — Validation & filtering</a> — signal-to-noise, outlier detection, and replacing bad vectors.</li>
+      <li><a href="05_masking_and_preprocessing.html">05 — Masking & preprocessing</a> — static/dynamic masking, when and why to use them.</li>
+      <li><a href="06_tips_tricks_pitfalls.html">06 — Tips, tricks & pitfalls</a> — practical checklist for reliable PIV.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>What you will learn</h2>
+    <ul>
+      <li>How PIV estimates velocity from image pairs and what assumptions it makes.</li>
+      <li>How to choose window size, overlap, search area, and time step.</li>
+      <li>How to validate, filter, mask, and smooth results without hiding errors.</li>
+      <li>How to interpret OpenPIV outputs and diagnose common problems.</li>
+    </ul>
+  </div>
+
+  <p class="muted">More examples: <a href="notebooks/">Jupyter notebooks</a> and the <a href="https://github.com/OpenPIV/openpiv-python-examples">repository</a>.</p>
+</body>
+</html>

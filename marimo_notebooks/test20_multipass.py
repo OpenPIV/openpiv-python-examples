@@ -1,0 +1,112 @@
+import marimo
+
+__generated_with = "0.25.2"
+app = marimo.App()
+
+
+app._unparsable_cell(
+    r"""
+    # %load red_Cell.py
+    from openpiv import tools, pyprocess, scaling, filters, \
+                        validation
+
+    import numpy as np
+    import matplotlib.pyplot as plt
+
+    import imageio
+    from pylab import *
+    # '%matplotlib inline' command supported automatically in marimo
+
+    from skimage import img_as_uint
+    """,
+    name="_"
+)
+
+
+@app.cell
+def _(tools):
+    frame_a  = tools.imread('../test20/t_23.png')  
+    frame_b  = tools.imread('../test20/t_24.png')
+    return frame_a, frame_b
+
+
+@app.cell
+def _():
+    # frame_a = frame_a[40:, :-40].astype(np.int32) # change of type for the Cython WiDIM
+    # frame_b = frame_b[40:, :-40].astype(np.int32)
+    return
+
+
+@app.cell
+def _(frame_a, frame_b, pyprocess):
+    # Use Python version, pyprocess:
+
+    u, v, sig2noise = pyprocess.extended_search_area_piv( frame_a, frame_b, 
+                                                         window_size=32, 
+                                                         overlap=16,
+                                                         search_area_size=32,
+                                                         dt=.1, 
+                                                         sig2noise_method='peak2peak',
+                                                        normalized_correlation=True,
+                                                        correlation_method = 'circular')
+    x, y = pyprocess.get_coordinates(image_size=frame_a.shape, 
+                                     search_area_size=32, 
+                                     overlap=16)
+    return sig2noise, u, v, x, y
+
+
+@app.cell
+def _(plt, sig2noise, u, v, x, y):
+    plt.quiver(x,y,u,-v,sig2noise)
+    plt.gca().invert_yaxis()
+    plt.colorbar()
+    return
+
+
+@app.cell
+def _(percentile, plt, sig2noise):
+    plt.hist(sig2noise.flatten());
+    p = percentile(sig2noise,5) # bottom 5%
+    plt.plot([p,p],[0,35],lw=2)
+    return (p,)
+
+
+@app.cell
+def _(filters, p, scaling, sig2noise, tools, u, v, validation, x, y):
+    mask = validation.sig2noise_val(sig2noise, threshold=p)
+    u_1, v_1 = filters.replace_outliers(u, v, mask, method='localmean', max_iter=1, kernel_size=2)
+    x_1, y_1, u_1, v_1 = scaling.uniform(x, y, u_1, v_1, scaling_factor=1.0)
+    x_1, y_1, u_1, v_1 = tools.transform_coordinates(x_1, y_1, u_1, v_1)
+    tools.save('test20_multipass.txt', x_1, y_1, u_1, v_1, mask)
+    return u_1, v_1, x_1, y_1
+
+
+@app.cell
+def _(plt, u_1, v_1, x_1, y_1):
+    # "natural" view without image
+    fig, ax = plt.subplots(2, 1, figsize=(6, 12))
+    # ax[0].invert_yaxis()
+    ax[0].quiver(x_1, y_1, u_1, v_1)
+    ax[0].set_title(' Sort of natural view ')
+    ax[1].quiver(x_1, y_1, u_1, v_1)
+    # plt.quiver(x,y,u,v)
+    ax[1].set_title('Quiver with 0,0 origin needs `negative` v for visualization purposes')
+    return
+
+
+@app.cell
+def _(plt, tools):
+    fig_1, ax_1 = plt.subplots(figsize=(8, 8))
+    tools.display_vector_field('test20_multipass.txt', on_img=True, image_name='../test20/t_23.png', scaling_factor=1.0, ax=ax_1)
+    return
+
+
+@app.cell
+def _(tools):
+    tools.display_vector_field('test20_multipass.txt', scale=300, 
+                               width=0.005,scaling_factor=1.)
+    return
+
+
+if __name__ == "__main__":
+    app.run()
